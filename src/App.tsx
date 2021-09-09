@@ -25,7 +25,7 @@ function App() {
     setPageNumber((prevPageNumber) => prevPageNumber + offset);
   }
 
-  function fetchPdf() {
+  const fetchPdf = () => {
     fetch(process.env.REACT_APP_API_URL + "/pdf/generate/", {
       method: "POST",
       body: JSON.stringify({
@@ -34,11 +34,11 @@ function App() {
     })
       .then((r) => r.blob())
       .then(setPdf);
-  }
+  };
 
   useEffect(() => {
     fetchPdf();
-  }, [fetchPdf]);
+  }, []);
 
   return (
     <div className="container mx-auto h-screen p-8">
