@@ -1,6 +1,7 @@
 import "./App.css";
 import React, { useState } from "react";
 import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
+import samplePdf from "./sample.pdf";
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-html";
 import "ace-builds/src-noconflict/theme-monokai";
@@ -28,7 +29,7 @@ function App() {
   const [code, setCode] = useState("");
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
-  const [pdf, setPdf] = useState(null);
+  const [pdf, setPdf] = useState(samplePdf);
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
     setPageNumber(1);
