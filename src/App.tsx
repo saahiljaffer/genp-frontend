@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import CodeEditor from "./Components/CodeEditor";
 import PDFViewer from "./Components/PDFViewer";
 import MenuBar from "./Components/MenuBar";
@@ -25,7 +25,7 @@ function App() {
     setPageNumber((prevPageNumber) => prevPageNumber + offset);
   }
 
-  const fetchPdf = () => {
+  const fetchPdf = useCallback(() => {
     fetch(process.env.REACT_APP_API_URL + "/pdf/generate/", {
       method: "POST",
       body: JSON.stringify({
@@ -34,9 +34,8 @@ function App() {
     })
       .then((r) => r.blob())
       .then(setPdf);
-  };
+  }, []);
 
-  //eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     fetchPdf();
   }, []);
