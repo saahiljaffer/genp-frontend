@@ -45,6 +45,7 @@ function App() {
     <div className="container mx-auto h-screen p-8">
       <div className="pb-4">
         <MenuBar
+          pdf={pdf}
           pageNumber={pageNumber}
           changePage={changePage}
           numPages={numPages}

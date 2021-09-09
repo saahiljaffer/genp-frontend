@@ -1,3 +1,4 @@
+import { doesNotThrow } from "assert";
 import React from "react";
 
 interface ButtonProps {
@@ -30,11 +31,13 @@ export default function MenuBar({
   changePage,
   numPages,
   fetchPdf,
+  pdf,
 }: {
   pageNumber: number;
   changePage: (pageNum: number) => void;
   numPages: number;
   fetchPdf: () => void;
+  pdf: Blob | undefined;
 }) {
   function previousPage() {
     changePage(-1);
@@ -46,8 +49,12 @@ export default function MenuBar({
 
   return (
     <div className="flex place-content-center">
+      <Button>
+        <a download="file.pdf" href={window.URL.createObjectURL(pdf)}>
+          Download
+        </a>
+      </Button>
       <Button onClick={fetchPdf}>Generate</Button>
-
       <Button disabled={pageNumber <= 1} onClick={previousPage}>
         Previous
       </Button>
