@@ -1,10 +1,13 @@
 import "./App.css";
 import React, { useState } from "react";
-import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
+// import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
 import samplePdf from "./sample.pdf";
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-html";
 import "ace-builds/src-noconflict/theme-monokai";
+
+import { Document, Page, pdfjs } from "react-pdf";
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 function Button(props) {
   if (props.disabled) {
