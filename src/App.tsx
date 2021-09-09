@@ -38,7 +38,7 @@ function App() {
 
   useEffect(() => {
     fetchPdf();
-  }, []);
+  }, [fetchPdf]);
 
   return (
     <div className="container mx-auto h-screen p-8">
