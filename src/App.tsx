@@ -34,7 +34,7 @@ function App() {
     })
       .then((r) => r.blob())
       .then(setPdf);
-  }, []);
+  }, [code]);
 
   useEffect(() => {
     fetchPdf();
