@@ -26,7 +26,7 @@ function App() {
   }
 
   function fetchPdf() {
-    fetch(process.env.REACT_APP_API_URL + "/pdf/generate/pdf/", {
+    fetch(process.env.REACT_APP_API_URL + "/pdf/generate/", {
       method: "POST",
       body: JSON.stringify({
         text: code,
