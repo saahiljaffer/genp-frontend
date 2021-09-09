@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import CodeEditor from "./Components/CodeEditor";
 import PDFViewer from "./Components/PDFViewer";
 import MenuBar from "./Components/MenuBar";
