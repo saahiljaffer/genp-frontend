@@ -74,12 +74,15 @@ function App() {
         />
         <Button
           onClick={() => {
-            fetch("http://localhost:8000/pdf/generate/pdf/", {
-              method: "POST",
-              body: JSON.stringify({
-                text: code,
-              }),
-            })
+            fetch(
+              "https://django-pdf-generator.herokuapp.com/pdf/generate/pdf/",
+              {
+                method: "POST",
+                body: JSON.stringify({
+                  text: code,
+                }),
+              }
+            )
               .then((r) => r.blob())
               .then(setPdf);
           }}
