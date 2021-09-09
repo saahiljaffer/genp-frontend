@@ -36,6 +36,7 @@ function App() {
       .then(setPdf);
   };
 
+  //eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     fetchPdf();
   }, []);
