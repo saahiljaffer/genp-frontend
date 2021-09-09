@@ -1,4 +1,3 @@
-import { doesNotThrow } from "assert";
 import React from "react";
 
 interface ButtonProps {
