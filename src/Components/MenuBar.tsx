@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 interface ButtonProps {
   children: React.ReactNode;
@@ -38,6 +38,14 @@ export default function MenuBar({
   fetchPdf: () => void;
   pdf: Blob | undefined;
 }) {
+  const [pdfUrl, setPdfUrl] = useState<string | undefined>();
+
+  useEffect(() => {
+    if (pdf) {
+      setPdfUrl(window.URL.createObjectURL(pdf));
+    }
+  }, [pdf]);
+
   function previousPage() {
     changePage(-1);
   }
@@ -49,7 +57,7 @@ export default function MenuBar({
   return (
     <div className="flex place-content-center">
       <Button>
-        <a download="file.pdf" href={window.URL.createObjectURL(pdf)}>
+        <a download="file.pdf" href={pdfUrl}>
           Download
         </a>
       </Button>
