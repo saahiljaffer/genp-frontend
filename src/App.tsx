@@ -45,7 +45,7 @@ function App() {
   return (
     <div className="container mx-auto h-screen p-8">
       <div className="pb-8">
-        <MenuBar onToggleClick={onToggleClick} fetchPdf={fetchPdf} />
+        <MenuBar CSS={CSS} onToggleClick={onToggleClick} fetchPdf={fetchPdf} />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 pb-24">
         <CodeEditor

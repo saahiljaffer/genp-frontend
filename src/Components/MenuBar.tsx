@@ -3,9 +3,11 @@ import Button from "./Button";
 export default function MenuBar({
   fetchPdf,
   onToggleClick,
+  CSS,
 }: {
   fetchPdf: () => void;
   onToggleClick: () => void;
+  CSS: boolean;
 }) {
   return (
     <div className="flex place-content-center">
