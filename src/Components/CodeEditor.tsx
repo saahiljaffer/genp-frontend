@@ -2,8 +2,6 @@ import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-html";
 import "ace-builds/src-noconflict/mode-css";
 import "ace-builds/src-noconflict/theme-monokai";
-import Button from "./Button";
-import { useState } from "react";
 
 export default function CodeEditor({
   code,
