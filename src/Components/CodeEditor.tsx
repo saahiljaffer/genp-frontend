@@ -1,35 +1,45 @@
-import React from "react";
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-html";
+import "ace-builds/src-noconflict/mode-css";
 import "ace-builds/src-noconflict/theme-monokai";
+import Button from "./Button";
+import { useState } from "react";
 
 export default function CodeEditor({
-  onChange,
   code,
+  onCodeChange,
+  css,
+  onCssChange,
+  CSS,
 }: {
-  onChange: (newValue: string) => void;
   code: string;
+  onCodeChange: (value: string) => void;
+  css: string;
+  onCssChange: (value: string) => void;
+  CSS: boolean;
 }) {
   return (
-    <AceEditor
-      style={{ height: "100%", width: "100%" }}
-      placeholder="Enter code here..."
-      mode="html"
-      theme="monokai"
-      name="blah2"
-      onChange={onChange}
-      fontSize={14}
-      showPrintMargin={false}
-      showGutter={true}
-      highlightActiveLine={true}
-      value={code}
-      setOptions={{
-        enableBasicAutocompletion: true,
-        enableLiveAutocompletion: true,
-        enableSnippets: true,
-        showLineNumbers: true,
-        tabSize: 2,
-      }}
-    />
+    <>
+      <AceEditor
+        style={{ height: "calc(100vh - 250px)", width: "100%" }}
+        placeholder="Enter code here..."
+        mode={CSS ? "css" : "html"}
+        theme="monokai"
+        name="blah2"
+        onChange={CSS ? onCssChange : onCodeChange}
+        fontSize={14}
+        showPrintMargin={false}
+        showGutter={true}
+        highlightActiveLine={true}
+        value={CSS ? css : code}
+        setOptions={{
+          enableBasicAutocompletion: true,
+          enableLiveAutocompletion: true,
+          enableSnippets: true,
+          showLineNumbers: true,
+          tabSize: 2,
+        }}
+      />
+    </>
   );
 }

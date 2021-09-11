@@ -6,23 +6,22 @@ import MenuBar from "./Components/MenuBar";
 
 function App() {
   const [code, setCode] = useState(
-    "<html>\n<head>\n</head>\n<body>\n</body>\n</html>"
+    "<html>\n  <head>\n  </head>\n  <body>\n\n  </body>\n</html>"
   );
-  const [numPages, setNumPages] = useState(0);
-  const [pageNumber, setPageNumber] = useState(1);
-  const [pdf, setPdf] = useState<Blob>();
+  const [css, setCss] = useState<string>("h1 {\n\n}");
+  const [pdfUrl, setPdfUrl] = useState<string | undefined>();
+  const [CSS, setCSS] = useState(false);
 
-  function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
-    setNumPages(numPages);
-    setPageNumber(1);
+  function onToggleClick() {
+    setCSS(!CSS);
   }
 
   function onCodeChange(newValue: string) {
     setCode(newValue);
   }
 
-  function changePage(offset: number) {
-    setPageNumber((prevPageNumber) => prevPageNumber + offset);
+  function onCssChange(newValue: string) {
+    setCss(newValue);
   }
 
   const fetchPdf = () => {
@@ -30,10 +29,12 @@ function App() {
       method: "POST",
       body: JSON.stringify({
         text: code,
+        css: css,
       }),
     })
       .then((r) => r.blob())
-      .then(setPdf);
+      .then(window.URL.createObjectURL)
+      .then(setPdfUrl);
   };
 
   useEffect(() => {
@@ -43,26 +44,18 @@ function App() {
 
   return (
     <div className="container mx-auto h-screen p-8">
-      <div className="pb-4">
-        <MenuBar
-          pdf={pdf}
-          pageNumber={pageNumber}
-          changePage={changePage}
-          numPages={numPages}
-          fetchPdf={fetchPdf}
-        />
+      <div className="pb-8">
+        <MenuBar onToggleClick={onToggleClick} fetchPdf={fetchPdf} />
       </div>
-      <div className="h-full w-full flex">
-        <div className="h-full w-full pr-4 ">
-          <CodeEditor code={code} onChange={onCodeChange} />
-        </div>
-        <div className="h-full bg-white mx-auto">
-          <PDFViewer
-            pdf={pdf}
-            onDocumentLoadSuccess={onDocumentLoadSuccess}
-            pageNumber={pageNumber}
-          />
-        </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 pb-24">
+        <CodeEditor
+          CSS={CSS}
+          code={code}
+          onCodeChange={onCodeChange}
+          css={css}
+          onCssChange={onCssChange}
+        />
+        <PDFViewer pdfUrl={pdfUrl} />
       </div>
     </div>
   );

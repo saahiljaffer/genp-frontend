@@ -1,19 +1,9 @@
-import React from "react";
-import { Document, Page, pdfjs } from "react-pdf/dist/esm/entry.webpack";
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
-
-export default function PDFViewer({
-  pdf,
-  onDocumentLoadSuccess,
-  pageNumber,
-}: {
-  pdf: Blob | undefined;
-  onDocumentLoadSuccess: ({ numPages }: { numPages: number }) => void;
-  pageNumber: number;
-}) {
+export default function PDFViewer({ pdfUrl }: { pdfUrl: string | undefined }) {
   return (
-    <Document file={pdf} onLoadSuccess={onDocumentLoadSuccess}>
-      <Page pageNumber={pageNumber} />
-    </Document>
+    <iframe
+      src={pdfUrl}
+      className="h-full w-full"
+      style={{ height: "calc(100vh - 250px)" }}
+    ></iframe>
   );
 }
