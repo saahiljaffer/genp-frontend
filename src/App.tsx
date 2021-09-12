@@ -1,9 +1,11 @@
 import "./App.css";
 import Generator from "./Pages/Generator";
 import Login from "./Pages/Login";
+import Signup from "./Pages/Signup";
 import NavBar from "./Components/NavBar";
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import LandingPage from "./Pages/LandingPage";
 
 function App() {
   return (
@@ -16,8 +18,14 @@ function App() {
           <Route path="/login">
             <Login />
           </Route>
-          <Route path="/">
+          <Route path="/signup">
+            <Signup />
+          </Route>
+          <Route path="/design">
             <Generator />
+          </Route>
+          <Route path="/">
+            <LandingPage />
           </Route>
         </Switch>
       </Router>

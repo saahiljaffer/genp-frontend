@@ -1,24 +1,11 @@
-import { initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { LockClosedIcon } from "@heroicons/react/solid";
-
-// Configure Firebase.
-const config = {
-  apiKey: "AIzaSyA_g3NGl1fswGiAn028Rq8VfRlqLZHA_1c",
-  authDomain: "isijniyaz.firebaseapp.com",
-  projectId: "isijniyaz",
-  storageBucket: "isijniyaz.appspot.com",
-  messagingSenderId: "575752581167",
-  appId: "1:575752581167:web:5cb8b2e65175a906b816da",
-};
-
-initializeApp(config);
 
 const auth = getAuth();
 
 export default function Login() {
   const onSubmit = () => {
-    signInWithEmailAndPassword(auth, "email", "password")
+    createUserWithEmailAndPassword(auth, "email", "password")
       .then((userCredential) => {
         // Signed in
         console.log(userCredential.user);
@@ -29,7 +16,6 @@ export default function Login() {
         console.log(error.message);
       });
   };
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
@@ -40,15 +26,15 @@ export default function Login() {
             alt="Workflow"
           />
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Sign in to your account
+            Sign up for a new account
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
             Or{" "}
             <a
-              href="/signup"
+              href="/login"
               className="font-medium text-indigo-600 hover:text-indigo-500"
             >
-              create a new account
+              login to your existing account
             </a>
           </p>
         </div>
@@ -100,15 +86,6 @@ export default function Login() {
                 Remember me
               </label>
             </div>
-
-            <div className="text-sm">
-              <a
-                href="/forgot-password"
-                className="font-medium text-indigo-600 hover:text-indigo-500"
-              >
-                Forgot your password?
-              </a>
-            </div>
           </div>
 
           <div>
@@ -123,7 +100,7 @@ export default function Login() {
                   aria-hidden="true"
                 />
               </span>
-              Login
+              Sign up
             </button>
           </div>
         </form>
