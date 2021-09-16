@@ -1,7 +1,7 @@
-/* This example requires Tailwind CSS v2.0+ */
 import { Fragment, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { useEffect } from "react";
+import { getAuth, signOut } from "firebase/auth";
 
 const navigation: { name: string; href: string; current: boolean }[] = [
   { name: "Log in", href: "/login", current: false },
@@ -11,11 +11,8 @@ function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function NavBar() {
-  const [signedIn, setSignedIn] = useState(false);
-  useEffect(() => {
-    setSignedIn(false);
-  }, []);
+export default function NavBar({ signedIn }: { signedIn: boolean }) {
+  const auth = getAuth();
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }: { open: boolean }) => (
@@ -59,12 +56,27 @@ export default function NavBar() {
                     <div>
                       <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                         <span className="sr-only">Open user menu</span>
-                        <img
-                          className="h-8 w-8 rounded-full"
-                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                          alt=""
-                        />
-                        )
+
+                        {auth.currentUser?.photoURL ? (
+                          <img
+                            className="h-8 w-8 rounded-full"
+                            src={auth.currentUser?.photoURL}
+                            alt="User Menu"
+                          />
+                        ) : (
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-8 w-8 rounded-full"
+                            viewBox="0 0 20 20"
+                            fill="#ffffff"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        )}
                       </Menu.Button>
                     </div>
                     <Transition
@@ -86,27 +98,19 @@ export default function NavBar() {
                                 "block px-4 py-2 text-sm text-gray-700"
                               )}
                             >
-                              Your Profile
+                              Profile
                             </a>
                           )}
                         </Menu.Item>
-                        <Menu.Item>
+
+                        <Menu.Item
+                          onClick={() => {
+                            signOut(auth);
+                          }}
+                        >
                           {({ active }: { active: boolean }) => (
                             <a
-                              href="/settings"
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
-                              )}
-                            >
-                              Settings
-                            </a>
-                          )}
-                        </Menu.Item>
-                        <Menu.Item>
-                          {({ active }: { active: boolean }) => (
-                            <a
-                              href="/logout"
+                              href="/"
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"
