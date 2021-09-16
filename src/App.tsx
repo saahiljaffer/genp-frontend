@@ -13,13 +13,6 @@ import Dashboard from "./Pages/Dashboard";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Profile from "./Pages/Profile";
 
-function ProtectedRoute(props: { children: React.ReactNode; path: string }) {
-  if (localStorage.getItem("uid")) {
-    return <Redirect to="/" />;
-  } else {
-    return <Route path={props.path}>{props.children}</Route>;
-  }
-}
 function App() {
   const auth = getAuth();
   const [signedIn, setSignedIn] = useState(false);
@@ -28,15 +21,15 @@ function App() {
       setSignedIn(!!user);
     }
   });
-  if (signedIn) {
-    return (
-      <>
-        <NavBar signedIn={signedIn} />
-        {signedIn}
-        <Router>
+
+  return (
+    <>
+      <NavBar signedIn={signedIn} />
+      <Router>
+        {signedIn ? (
           <Switch>
             <Route path="/profile">
-              <Profile signedIn={signedIn} />
+              <Profile />
             </Route>
             <Route path="/design">
               <Generator />
@@ -47,17 +40,9 @@ function App() {
             <Route exact path="/">
               <LandingPage signedIn={signedIn} />
             </Route>
-            {/* <Redirect to="/" /> */}
+            <Redirect to="/" />
           </Switch>
-        </Router>
-      </>
-    );
-  } else {
-    return (
-      <>
-        <NavBar signedIn={signedIn} />
-        {signedIn}
-        <Router>
+        ) : (
           <Switch>
             <Route path="/forgot-password">
               <ForgotPassword />
@@ -71,12 +56,12 @@ function App() {
             <Route exact path="/">
               <LandingPage signedIn={signedIn} />
             </Route>
-            <Redirect to="/" />
           </Switch>
-        </Router>
-      </>
-    );
-  }
+        )}
+      </Router>
+      {signedIn ? <h1>Logged in</h1> : <h1>Logged out</h1>}
+    </>
+  );
 }
 
 export default App;

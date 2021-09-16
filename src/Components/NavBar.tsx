@@ -1,6 +1,5 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { useEffect } from "react";
 import { getAuth, signOut } from "firebase/auth";
 
 const navigation: { name: string; href: string; current: boolean }[] = [

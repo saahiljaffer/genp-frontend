@@ -22,7 +22,19 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const onSubmit = () => {};
+  const onSubmit = () => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        console.log(userCredential.user.uid);
+        localStorage.setItem("uid", userCredential.user.uid);
+        // ...
+      })
+      .catch((error) => {
+        console.log(error.code);
+        console.log(error.message);
+      });
+  };
 
   if (!auth.currentUser) {
     return (
@@ -116,19 +128,7 @@ export default function Login() {
 
             <div>
               <button
-                onClick={() => {
-                  signInWithEmailAndPassword(auth, email, password)
-                    .then((userCredential) => {
-                      // Signed in
-                      console.log(userCredential.user.uid);
-                      localStorage.setItem("uid", userCredential.user.uid);
-                      // ...
-                    })
-                    .catch((error) => {
-                      console.log(error.code);
-                      console.log(error.message);
-                    });
-                }}
+                onClick={onSubmit}
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 <span className="absolute left-0 inset-y-0 flex items-center pl-3">
