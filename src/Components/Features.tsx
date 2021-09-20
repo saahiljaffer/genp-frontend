@@ -10,25 +10,25 @@ const features = [
   {
     name: "Easy to Use",
     description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.",
+      "Our application was designed to be extremely easy to use and can be used by anyone.",
     icon: GlobeAltIcon,
-  },
-  {
-    name: "Instant document generation",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.",
-    icon: ScaleIcon,
   },
   {
     name: "Flexible to your creativity",
     description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.",
+      "GenP was designed to enable designers to be extremely creative by allowing users flexibility in their design choices.",
+    icon: ScaleIcon,
+  },
+  {
+    name: "Instant document generation",
+    description:
+      "This platform instantly generates documents so that you can see (and download) your work in real time.",
     icon: LightningBoltIcon,
   },
   {
     name: "Use HTML and CSS to make anything",
     description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.",
+      "By using HTML and CSS, we enable you to create documents using familiar and flexible tools.",
     icon: AnnotationIcon,
   },
 ];
@@ -45,8 +45,7 @@ export default function Features() {
             A better way to create documents
           </p>
           <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-            Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam
-            voluptatum cupiditate veritatis in accusamus quisquam.
+            GenP is the best platform to create any document
           </p>
         </div>
 
